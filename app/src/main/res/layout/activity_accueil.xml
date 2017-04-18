@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.noiseux1523.vireesulhop.Information">
+    tools:context="com.example.noiseux1523.vireesulhop.Accueil">
 
-    <include layout="@layout/content_information" />
+    <include layout="@layout/content_accueil" />
 
 </android.support.design.widget.CoordinatorLayout>
