@@ -25,7 +25,10 @@
         <activity
             android:name=".Biere"
             android:label="@string/title_activity_biere"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Procedure" />
+        <activity android:name=".Outils" />
+        <activity android:name=".Evaluation"></activity>
     </application>
 
 </manifest>

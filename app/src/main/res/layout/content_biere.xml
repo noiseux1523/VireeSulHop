@@ -19,9 +19,9 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/beer"
-            android:id="@+id/imageView"
-            android:scaleType="centerCrop" />
+            android:id="@+id/photo"
+            android:scaleType="centerCrop"
+            android:background="@drawable/beer" />
 
     </RelativeLayout>
 
@@ -33,58 +33,140 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="VERSION"
+            android:text="MOUSTACHE CARESSE"
             android:layout_height="0dp"
             android:layout_width="match_parent"
             android:layout_weight="2"
-            android:id="@+id/version"
-            android:gravity="center_horizontal"
-            android:textColor="@color/button_color"/>
+            android:textSize="22dp"
+            android:id="@+id/nom"
+            android:gravity="center"
+            android:textColor="@android:color/holo_green_light" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_height="0dp"
             android:layout_width="fill_parent"
-            android:layout_weight="2"
-            android:weightSum="2">
+            android:layout_weight="1"
+            android:weightSum="3">
 
             <TextView
                 android:text="ABV"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:id="@+id/abv"
                 android:layout_weight="1"
-                android:textColor="@color/button_color"/>
+                android:textSize="17dp"
+                android:textColor="@color/button_color" />
+
+            <TextView
+                android:text="VERSION"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/version"
+                android:gravity="center"
+                android:textSize="17dp"
+                android:textColor="@color/button_color" />
 
             <TextView
                 android:text="IBU"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:id="@+id/ibu"
                 android:layout_weight="1"
-                android:textColor="@color/button_color"/>
+                android:textSize="17dp"
+                android:textColor="@color/button_color" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="0dp"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:weightSum="9">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:text="4.6%"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/abv_value"
+                android:gravity="center"
+                android:textColor="@android:color/holo_green_light"
+                android:backgroundTint="#FFFFFF" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center" />
+
+            <TextView
+                android:text="BETA"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/version_value"
+                android:gravity="center"
+                android:textColor="@android:color/holo_green_light"
+                android:backgroundTint="#FFFFFF" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center" />
+
+            <TextView
+                android:text="16"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/ibu_value"
+                android:gravity="center"
+                android:textColor="@android:color/holo_green_light"
+                android:backgroundTint="#FFFFFF" />
 
         </LinearLayout>
 
         <TextView
-            android:text="DESCRIPTION"
+            android:text="UNE BELLE CONCOCTION DE DEUX GARS VRAIMENT CHAUDS QUI VEULENT SEULEMENT SE FAIRE AIMER... PEO..."
             android:layout_height="0dp"
             android:layout_width="match_parent"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:layout_weight="4"
             android:id="@+id/description"
-            android:textColor="@color/button_color"/>
+            android:layout_margin="5dp"
+            android:textColor="@android:color/holo_green_light" />
 
         <TextView
             android:text="INGREDIENTS"
             android:layout_height="0dp"
             android:layout_width="match_parent"
-            android:gravity="center_horizontal"
-            android:layout_weight="2"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textSize="17dp"
             android:id="@+id/ingredients"
-            android:textColor="@color/button_color"/>
+            android:textColor="@color/button_color" />
+
+        <TextView
+            android:text="MALTS, HOUBLONS, LEVURE, EAU, AMOUR..."
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/ingredients_value"
+            android:textColor="@android:color/holo_green_light"
+            />
 
     </LinearLayout>
 
