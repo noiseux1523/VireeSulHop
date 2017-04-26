@@ -1,66 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_biere"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.noiseux1523.vireesulhop.Biere"
     tools:showIn="@layout/activity_biere"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <!--<ImageView-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/beerfoam"-->
-    <!--android:src="@drawable/beerfoam_burn"-->
-    <!--android:adjustViewBounds="true"-->
-    <!--android:cropToPadding="true"-->
-    <!--android:scaleType="fitCenter"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:layout_alignParentStart="true" />-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5">
 
-    <!--<TextView-->
-    <!--android:text="Viree Sul' Hop"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:id="@+id/titre"-->
-    <!--android:layout_height="60dp"-->
-    <!--android:gravity="center"-->
-    <!--android:textColor="@android:color/background_dark"-->
-    <!--android:textSize="36sp"-->
-    <!--android:textStyle="normal|bold"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:layout_alignParentStart="true" />-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/beer"
+            android:id="@+id/imageView"
+            android:scaleType="centerCrop" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/logo"
-        android:adjustViewBounds="false"
-        android:cropToPadding="true"
-        android:src="@drawable/etiquettebackstrip"
-        android:scaleType="fitEnd"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    </RelativeLayout>
 
-    <!--<TextView-->
-        <!--android:text="MENU"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="180dp"-->
-        <!--android:id="@+id/bieres"-->
-        <!--android:textColor="@android:color/holo_orange_dark"-->
-        <!--android:gravity="center"-->
-        <!--android:textSize="60sp"-->
-        <!--android:textStyle="normal|bold"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_alignParentEnd="true" />-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:weightSum="10"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <TextView
+            android:text="VERSION"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:id="@+id/version"
+            android:gravity="center_horizontal"
+            android:textColor="@color/button_color"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="0dp"
+            android:layout_width="fill_parent"
+            android:layout_weight="2"
+            android:weightSum="2">
+
+            <TextView
+                android:text="ABV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:id="@+id/abv"
+                android:layout_weight="1"
+                android:textColor="@color/button_color"/>
+
+            <TextView
+                android:text="IBU"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:id="@+id/ibu"
+                android:layout_weight="1"
+                android:textColor="@color/button_color"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:text="DESCRIPTION"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_weight="4"
+            android:id="@+id/description"
+            android:textColor="@color/button_color"/>
+
+        <TextView
+            android:text="INGREDIENTS"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_weight="2"
+            android:id="@+id/ingredients"
+            android:textColor="@color/button_color"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -3,7 +3,6 @@ package com.example.noiseux1523.vireesulhop;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 
 public class Accueil extends Activity {

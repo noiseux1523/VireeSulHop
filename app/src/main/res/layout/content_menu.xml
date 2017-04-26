@@ -30,7 +30,7 @@
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:weightSum="2"
-        android:id="@+id/buttons_layout">
+        android:id="@+id/buttons_layout1">
 
         <TextView
             android:text="EVALUATION"
@@ -42,7 +42,7 @@
             android:id="@+id/evaluer"
             android:textColor="@color/button_color"
             android:gravity="center"
-            android:textSize="25sp"
+            android:textSize="30sp"
             android:textStyle="normal|bold"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -58,7 +58,47 @@
             android:id="@+id/bieres"
             android:textColor="@color/button_color"
             android:gravity="center"
-            android:textSize="25sp"
+            android:textSize="30sp"
+            android:textStyle="normal|bold"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:weightSum="2"
+        android:id="@+id/buttons_layout2">
+
+        <TextView
+            android:text="PROCEDURE"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_border"
+            android:id="@+id/procedure"
+            android:textColor="@color/button_color"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textStyle="normal|bold"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="OUTILS"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_border"
+            android:id="@+id/outils"
+            android:textColor="@color/button_color"
+            android:gravity="center"
+            android:textSize="30sp"
             android:textStyle="normal|bold"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
