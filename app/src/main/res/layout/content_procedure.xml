@@ -14,7 +14,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:textSize="18dp"
+                android:textSize="26sp"
                 android:layout_margin="2dp"
                 android:id="@+id/setupmash"
                 android:textColor="@color/button_color"
@@ -44,8 +44,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:id="@+id/checkBox"
-                android:layout_weight="1" />
+                android:id="@+id/checkBox1"
+                android:layout_weight="1"
+                app:buttonTint="@android:color/holo_green_light"
+                android:textColorLink="@android:color/holo_green_light" />
 
             <TextView
                 android:text="Double check all ingredients"
@@ -53,62 +55,1696 @@
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:layout_weight="4"
-                android:id="@+id/description"
+                android:id="@+id/description1"
                 android:layout_margin="5dp"
-                android:textColor="@android:color/holo_green_light" />
+                android:textColor="@android:color/holo_green_light"
+                android:textSize="20sp"/>
 
             <Chronometer
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/chronometer2"
+                android:id="@+id/chronometer1"
                 android:gravity="center"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textColor="@android:color/background_light"
+                android:clickable="false" />
 
         </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox2"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Ensure equipments' cleanliness"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description2"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer2"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox3"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Weigh out &amp; mill grains"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description3"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer3"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox4"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Close valves on brew kettle &amp; mash tun"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description4"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer4"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox5"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Heat strike water"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description5"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer5"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox6"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Add brewing salts (optional)"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description6"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer6"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox7"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Preheat mash tun"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description7"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer7"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox8"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Begin mash &amp; start timer"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description8"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer8"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox9"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Monitor temperature"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description9"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer9"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox10"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Heat sparge water"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description10"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer10"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
 
             <TextView
                 android:text="SPARGE &amp; BOIL"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:textSize="18dp"
+                android:textSize="26sp"
                 android:layout_margin="2dp"
                 android:id="@+id/spargeboil"
                 android:textColor="@color/button_color"
                 android:background="@drawable/button_border"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox11"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Vorlauf &amp; drain to brew kettle"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description11"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer11"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox12"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Add sparge water to mash tun &amp; wait"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description12"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer12"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox13"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Drain to brew kettle"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description13"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer13"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/editText1"
+                    android:background="@drawable/value_border"
+                    android:layout_weight="1"
+                    android:hint="-"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_light"
+                    android:textColorHint="@android:color/background_light"
+                    android:layout_margin="1dp"
+                    android:selectAllOnFocus="false" />
+
+                <TextView
+                    android:text="PRE-BOIL GRAVITY"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description14"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"
+                    android:textStyle="normal|bold" />
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer14"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/editText2"
+                    android:background="@drawable/value_border"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:hint="L"
+                    android:textColor="@android:color/background_light"
+                    android:textColorHint="@android:color/background_light"
+                    android:layout_margin="1dp"
+                    android:selectAllOnFocus="false" />
+
+                <TextView
+                    android:text="PRE-BOIL WORT COLLECTED"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description15"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"
+                    android:textStyle="normal|bold"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer15"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox14"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Fire the brew kettle"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description16"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer16"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox15"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Bring to a boil &amp; start timer"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description17"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer17"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox16"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Submerge wort chiller"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description18"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer18"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
 
             <TextView
                 android:text="FINAL STEPS"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:textSize="18dp"
+                android:textSize="26sp"
                 android:layout_margin="2dp"
                 android:id="@+id/finalsteps"
                 android:textColor="@color/button_color"
                 android:background="@drawable/button_border"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox17"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Sanitize lid of brew kettle"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description19"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer19"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox18"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Flame out"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description20"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer20"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox19"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Set lid on brew kettle &amp; activate wort chiller"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description21"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer21"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox20"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Sanitize appropriate equipments"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description22"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer22"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox21"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Transfer wort into primary fermenter"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description23"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer23"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox22"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Aerate wort"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description24"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer24"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/editText3"
+                    android:background="@drawable/value_border"
+                    android:layout_weight="1"
+                    android:hint="-"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_light"
+                    android:textColorHint="@android:color/background_light"
+                    android:layout_margin="1dp"
+                    android:selectAllOnFocus="false" />
+
+                <TextView
+                    android:text="ORIGINAL GRAVITY"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description25"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"
+                    android:textStyle="normal|bold" />
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer25"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/editText4"
+                    android:background="@drawable/value_border"
+                    android:layout_weight="1"
+                    android:hint="L"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_light"
+                    android:textColorHint="@android:color/background_light"
+                    android:layout_margin="1dp"
+                    android:selectAllOnFocus="false" />
+
+                <TextView
+                    android:text="WORT COLLECTED"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description26"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"
+                    android:textStyle="normal|bold" />
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer26"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox23"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Pitch yeast"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description27"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer27"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox24"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Fit with airlock"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description28"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer28"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox25"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Move primary fermenter to appropriate area"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description29"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer29"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox26"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Clean up equipment"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description30"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer30"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
 
             <TextView
                 android:text="RACKING"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:textSize="18dp"
+                android:textSize="26sp"
                 android:layout_margin="2dp"
                 android:id="@+id/racking"
                 android:textColor="@color/button_color"
                 android:background="@drawable/button_border"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox27"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Move primary fermenter up &amp; let sediment settle"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description31"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer31"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox28"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Sanitize appropriate equipments"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description32"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer32"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox29"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Set secondary fermenter below the primary"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description33"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer33"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox30"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Rack beer into secondary fermenter"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description34"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer34"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox31"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Fit with airlock"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description35"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer35"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
 
             <TextView
                 android:text="BOTTLING"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:textSize="18dp"
+                android:textSize="26sp"
                 android:layout_margin="2dp"
                 android:id="@+id/bottling"
                 android:textColor="@color/button_color"
                 android:background="@drawable/button_border"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox32"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Prepare priming sugar"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description36"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer36"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox33"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Move secondary fermenter up &amp; let sediment settle"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description37"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer37"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox34"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Sanitize bottles &amp; cap"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description38"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer38"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox35"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Sanitize appropriate equipments"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description39"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer39"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox36"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Rack beer into bottling bucket"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description40"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer40"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox37"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Add priming sugar solution"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description41"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer41"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/editText5"
+                    android:background="@drawable/value_border"
+                    android:layout_weight="1"
+                    android:hint="-"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_light"
+                    android:textColorHint="@android:color/background_light"
+                    android:layout_margin="1dp"
+                    android:selectAllOnFocus="false" />
+
+                <TextView
+                    android:text="FINAL GRAVITY"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description42"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"
+                    android:textStyle="normal|bold" />
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer42"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox38"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Siphon beer into bottles"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description43"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer43"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/checkbox39"
+                    android:layout_weight="1"
+                    app:buttonTint="@android:color/holo_green_light"
+                    android:textColorLink="@android:color/holo_green_light" />
+
+                <TextView
+                    android:text="Cap and mark bottles"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="4"
+                    android:id="@+id/description44"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="20sp"/>
+
+                <Chronometer
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer44"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_light"
+                    android:clickable="false" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

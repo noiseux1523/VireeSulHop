@@ -27,6 +27,12 @@ public class Menu extends AppCompatActivity {
         // Evaluation button
         evaluer = (TextView)findViewById(R.id.evaluer);
         evaluer.setTypeface(custom_font);
+        evaluer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                evaluation();
+            }
+        });
 
         // Beer List button
         bieres = (TextView)findViewById(R.id.bieres);
@@ -41,14 +47,41 @@ public class Menu extends AppCompatActivity {
         // Procedure button
         procedure = (TextView)findViewById(R.id.procedure);
         procedure.setTypeface(custom_font);
+        procedure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                procedure();
+            }
+        });
 
         // Tools button
         outils = (TextView)findViewById(R.id.outils);
         outils.setTypeface(custom_font);
+        outils.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tools();
+            }
+        });
+    }
+
+    public void evaluation() {
+        Intent intent = new Intent(this, Evaluation.class);
+        startActivity(intent);
     }
 
     public void beerList() {
         Intent intent = new Intent(this, Biere.class);
+        startActivity(intent);
+    }
+
+    public void procedure() {
+        Intent intent = new Intent(this, Procedure.class);
+        startActivity(intent);
+    }
+
+    public void tools() {
+        Intent intent = new Intent(this, Outils.class);
         startActivity(intent);
     }
 

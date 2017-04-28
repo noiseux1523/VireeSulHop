@@ -26,9 +26,17 @@
             android:name=".Biere"
             android:label="@string/title_activity_biere"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Procedure" />
-        <activity android:name=".Outils" />
-        <activity android:name=".Evaluation"></activity>
+        <activity
+            android:name=".Procedure"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Outils"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Evaluation"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
