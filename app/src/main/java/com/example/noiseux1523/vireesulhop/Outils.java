@@ -1,5 +1,6 @@
 package com.example.noiseux1523.vireesulhop;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -13,12 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.noiseux1523.vireesulhop.R.drawable.edittext_border;
 
 public class Outils extends AppCompatActivity {
 
-    // Variables
+    // Button Variables
     private TextView FtoC;
     private TextView HtoV;
     private TextView gravity;
@@ -105,33 +107,33 @@ public class Outils extends AppCompatActivity {
             row.setLayoutParams(params1);
 
             // Create TextView for celsius
-            TextView H = new TextView(this);
+            TextView C = new TextView(this);
             TableRow.LayoutParams params2 = new TableRow.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f);
-            H.setLayoutParams(params2);
-            H.setGravity(Gravity.CENTER);
-            H.setText(Integer.toString(i*5));
-            H.setTextSize(20);
+            C.setLayoutParams(params2);
+            C.setGravity(Gravity.CENTER);
+            C.setText(Integer.toString(i*5));
+            C.setTextSize(20);
 
             // Create TextView for farenheit
-            TextView V = new TextView(this);
+            TextView F = new TextView(this);
             TableRow.LayoutParams params3 = new TableRow.LayoutParams(0, LayoutParams.MATCH_PARENT, 1f);
-            V.setLayoutParams(params3);
-            V.setGravity(Gravity.CENTER);
-            double volume = ((i*5) * (9/5)) + 32;
-            V.setText(String.format("%.0f", volume));
-            V.setTextSize(20);
+            F.setLayoutParams(params3);
+            F.setGravity(Gravity.CENTER);
+            double temp = (i*5*1.8)+32;
+            F.setText(String.format("%.0f", temp));
+            F.setTextSize(20);
 
             // To alternate colors
             if ((i & 1) == 0) {
                 row.setBackgroundResource(R.color.white);
             } else {
                 row.setBackgroundResource(R.color.background_color);
-                H.setTextColor(Color.parseColor("#FFFFFF"));
-                V.setTextColor(Color.parseColor("#FFFFFF"));
+                C.setTextColor(Color.parseColor("#FFFFFF"));
+                F.setTextColor(Color.parseColor("#FFFFFF"));
             }
 
-            row.addView(H);
-            row.addView(V);
+            row.addView(C);
+            row.addView(F);
             layout.addView(row);
         }
 
@@ -231,28 +233,28 @@ public class Outils extends AppCompatActivity {
         rowVol.setLayoutParams(params1);
         rowVol.setPadding(10, 10, 10, 10);
 
-        // Create TextView for Start Volume
-        TextView volume = new TextView(this);
-        volume.setLayoutParams(params2);
-        volume.setGravity(Gravity.CENTER);
-        volume.setText("Specific Gravity");
-        volume.setTypeface(Typeface.DEFAULT_BOLD);
-        volume.setTextColor(Color.parseColor("#000000"));
-        volume.setTextSize(20);
+        // Create TextView for Gravity
+        TextView sg = new TextView(this);
+        sg.setLayoutParams(params2);
+        sg.setGravity(Gravity.CENTER);
+        sg.setText("Specific Gravity");
+        sg.setTypeface(Typeface.DEFAULT_BOLD);
+        sg.setTextColor(Color.parseColor("#000000"));
+        sg.setTextSize(20);
 
-        // Create TextView for Volume Input
-        EditText volumeInput = new EditText(this);
-        volumeInput.setLayoutParams(params3);
-        volumeInput.setGravity(Gravity.CENTER);
-        volumeInput.setBackground(getResources().getDrawable(edittext_border));
-        volumeInput.setCursorVisible(false);
-        volumeInput.setHint("1.05");
-        volumeInput.setTextColor(Color.parseColor("#000000"));
-        volumeInput.setHintTextColor(Color.parseColor("#FFBCBCBC"));
-        volumeInput.setTextSize(20);
+        // Create TextView for Gravity Input
+        final EditText sgInput = new EditText(this);
+        sgInput.setLayoutParams(params3);
+        sgInput.setGravity(Gravity.CENTER);
+        sgInput.setBackground(getResources().getDrawable(edittext_border));
+        sgInput.setCursorVisible(false);
+        sgInput.setHint("1.05");
+        sgInput.setTextColor(Color.parseColor("#000000"));
+        sgInput.setHintTextColor(Color.parseColor("#FFBCBCBC"));
+        sgInput.setTextSize(20);
 
-        rowVol.addView(volume);
-        rowVol.addView(volumeInput);
+        rowVol.addView(sg);
+        rowVol.addView(sgInput);
         layout.addView(rowVol);
 
         // Create TableRow
@@ -260,28 +262,28 @@ public class Outils extends AppCompatActivity {
         rowOG.setLayoutParams(params1);
         rowOG.setPadding(10, 10, 10, 10);
 
-        // Create TextView for OG
-        TextView og = new TextView(this);
-        og.setLayoutParams(params2);
-        og.setGravity(Gravity.CENTER);
-        og.setText("Recorded Temp (C)");
-        og.setTypeface(Typeface.DEFAULT_BOLD);
-        og.setTextColor(Color.parseColor("#000000"));
-        og.setTextSize(20);
+        // Create TextView for Recorded Temp
+        TextView recTemp = new TextView(this);
+        recTemp.setLayoutParams(params2);
+        recTemp.setGravity(Gravity.CENTER);
+        recTemp.setText("Recorded Temp (C)");
+        recTemp.setTypeface(Typeface.DEFAULT_BOLD);
+        recTemp.setTextColor(Color.parseColor("#000000"));
+        recTemp.setTextSize(20);
 
-        // Create TextView for OG Input
-        EditText ogInput = new EditText(this);
-        ogInput.setLayoutParams(params3);
-        ogInput.setGravity(Gravity.CENTER);
-        ogInput.setBackground(getResources().getDrawable(edittext_border));
-        ogInput.setCursorVisible(false);
-        ogInput.setHint("65");
-        ogInput.setTextColor(Color.parseColor("#000000"));
-        ogInput.setHintTextColor(Color.parseColor("#FFBCBCBC"));
-        ogInput.setTextSize(20);
+        // Create TextView for Recorded Temp Input
+        final EditText recTempInput = new EditText(this);
+        recTempInput.setLayoutParams(params3);
+        recTempInput.setGravity(Gravity.CENTER);
+        recTempInput.setBackground(getResources().getDrawable(edittext_border));
+        recTempInput.setCursorVisible(false);
+        recTempInput.setHint("65");
+        recTempInput.setTextColor(Color.parseColor("#000000"));
+        recTempInput.setHintTextColor(Color.parseColor("#FFBCBCBC"));
+        recTempInput.setTextSize(20);
 
-        rowOG.addView(og);
-        rowOG.addView(ogInput);
+        rowOG.addView(recTemp);
+        rowOG.addView(recTempInput);
         layout.addView(rowOG);
 
         // Create TableRow
@@ -289,33 +291,83 @@ public class Outils extends AppCompatActivity {
         rowTG.setLayoutParams(params1);
         rowTG.setPadding(10, 10, 10, 10);
 
-        // Create TextView for TG
-        TextView tg = new TextView(this);
-        tg.setLayoutParams(params2);
-        tg.setGravity(Gravity.CENTER);
-        tg.setText("Calibrated Temp (C)");
-        tg.setTypeface(Typeface.DEFAULT_BOLD);
-        tg.setTextColor(Color.parseColor("#000000"));
-        tg.setTextSize(20);
+        // Create TextView for Calibrated Temp
+        TextView calTemp = new TextView(this);
+        calTemp.setLayoutParams(params2);
+        calTemp.setGravity(Gravity.CENTER);
+        calTemp.setText("Calibrated Temp (C)");
+        calTemp.setTypeface(Typeface.DEFAULT_BOLD);
+        calTemp.setTextColor(Color.parseColor("#000000"));
+        calTemp.setTextSize(20);
 
-        // Create TextView for TG Input
-        EditText tgInput = new EditText(this);
-        tgInput.setLayoutParams(params3);
-        tgInput.setGravity(Gravity.CENTER);
-        tgInput.setBackground(getResources().getDrawable(edittext_border));
-        tgInput.setCursorVisible(false);
-        tgInput.setText("15");
-        tgInput.setTextColor(Color.parseColor("#000000"));
-        tgInput.setHintTextColor(Color.parseColor("#FFBCBCBC"));
-        tgInput.setTextSize(20);
+        // Create TextView for Calibrated Temp Input
+        final EditText calTempInput = new EditText(this);
+        calTempInput.setLayoutParams(params3);
+        calTempInput.setGravity(Gravity.CENTER);
+        calTempInput.setBackground(getResources().getDrawable(edittext_border));
+        calTempInput.setCursorVisible(false);
+        calTempInput.setText("15");
+        calTempInput.setTextColor(Color.parseColor("#000000"));
+        calTempInput.setHintTextColor(Color.parseColor("#FFBCBCBC"));
+        calTempInput.setTextSize(20);
 
-        rowTG.addView(tg);
-        rowTG.addView(tgInput);
+        rowTG.addView(calTemp);
+        rowTG.addView(calTempInput);
         layout.addView(rowTG);
 
-        dialog.setView(layout);
-        dialog.show();
+        // Create TableRow
+        TableRow rowAdjusted = new TableRow(this);
+        rowAdjusted.setLayoutParams(params1);
+        rowAdjusted.setPadding(10, 10, 10, 10);
 
+        // Create TextView for AG
+        TextView ag = new TextView(this);
+        ag.setLayoutParams(params2);
+        ag.setGravity(Gravity.CENTER);
+        ag.setText("Adjusted Gravity");
+        ag.setTypeface(Typeface.DEFAULT_BOLD);
+        ag.setTextColor(Color.parseColor("#FF99CC00"));
+        ag.setTextSize(20);
+
+        // Create TextView for AG Input
+        final TextView agInput = new TextView(this);
+        agInput.setLayoutParams(params3);
+        agInput.setGravity(Gravity.CENTER);
+        agInput.setTextColor(Color.parseColor("#FF99CC00"));
+        agInput.setTextSize(20);
+
+        rowAdjusted.addView(ag);
+        rowAdjusted.addView(agInput);
+        layout.addView(rowAdjusted);
+
+        dialog.setView(layout);
+
+        dialog.setPositiveButton("Calculate", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    if ((sgInput != null) && (recTempInput != null) && (calTempInput != null)) {
+                        double sg = Double.parseDouble(String.valueOf(sgInput.getText()));
+                        double recTemp = Double.parseDouble(String.valueOf(recTempInput.getText()));
+                        double calTemp = Double.parseDouble(String.valueOf(calTempInput.getText()));
+
+                        double recTempF = (recTemp*1.8)+32;
+                        double calTempF = (calTemp*1.8)+32;
+
+                        double correctedGravity = sg * ((1.00130346 - 0.000134722124 * recTempF + 0.00000204052596 * Math.pow(recTempF,2) - 0.00000000232820948 * Math.pow(recTempF,3) / (1.00130346 - 0.000134722124 * calTempF + 0.00000204052596 * Math.pow(calTempF,2) - 0.00000000232820948 * Math.pow(calTempF,3))));
+                        agInput.setText(correctedGravity+"");
+
+                    } else {
+                        Toast.makeText(Outils.this,
+                                "You are missing information!", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        dialog.show();
     }
 
     public void gravityAdjust() {
@@ -433,14 +485,116 @@ public class Outils extends AppCompatActivity {
     }
 
     public void sugarPriming() {
-        // Create table window
+        // Create AlertDialog
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("Sugar Priming");
-        ScrollView scroll = new ScrollView(this);
+        TextView title = new TextView(this);
+        title.setText("Sugar Priming");
+        title.setBackgroundColor(Color.DKGRAY);
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(22);
+        dialog.setCustomTitle(title);
+
+        // Set layout parameters
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+        TableRow.LayoutParams params1 = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT, 3f);
+        TableRow.LayoutParams params2 = new TableRow.LayoutParams(0, LayoutParams.MATCH_PARENT, 2f);
+        TableRow.LayoutParams params3 = new TableRow.LayoutParams(0, LayoutParams.MATCH_PARENT, 1f);
+
+        // Create LinearLayout
         LinearLayout layout = new LinearLayout(this);
+        layout.setLayoutParams(params);
         layout.setOrientation(LinearLayout.VERTICAL);
-        scroll.addView(layout);
-        dialog.setView(scroll);
+
+        // Create TableRow
+        TableRow rowVol = new TableRow(this);
+        rowVol.setLayoutParams(params1);
+        rowVol.setPadding(10, 10, 10, 10);
+
+        // Create TextView for Beer Temp
+        TextView temp = new TextView(this);
+        temp.setLayoutParams(params2);
+        temp.setGravity(Gravity.CENTER);
+        temp.setText("Beer Temperature (F)");
+        temp.setTypeface(Typeface.DEFAULT_BOLD);
+        temp.setTextColor(Color.parseColor("#000000"));
+        temp.setTextSize(20);
+
+        // Create TextView for Temp Input
+        EditText tempInput = new EditText(this);
+        tempInput.setLayoutParams(params3);
+        tempInput.setGravity(Gravity.CENTER);
+        tempInput.setBackground(getResources().getDrawable(edittext_border));
+        tempInput.setCursorVisible(false);
+        tempInput.setHint("24");
+        tempInput.setTextColor(Color.parseColor("#000000"));
+        tempInput.setHintTextColor(Color.parseColor("#FFBCBCBC"));
+        tempInput.setTextSize(20);
+
+        rowVol.addView(temp);
+        rowVol.addView(tempInput);
+        layout.addView(rowVol);
+
+        // Create TableRow
+        TableRow rowOG = new TableRow(this);
+        rowOG.setLayoutParams(params1);
+        rowOG.setPadding(10, 10, 10, 10);
+
+        // Create TextView for Volume
+        TextView volume = new TextView(this);
+        volume.setLayoutParams(params2);
+        volume.setGravity(Gravity.CENTER);
+        volume.setText("Beer Volume (gal)");
+        volume.setTypeface(Typeface.DEFAULT_BOLD);
+        volume.setTextColor(Color.parseColor("#000000"));
+        volume.setTextSize(20);
+
+        // Create TextView for Volume Input
+        EditText volumeInput = new EditText(this);
+        volumeInput.setLayoutParams(params3);
+        volumeInput.setGravity(Gravity.CENTER);
+        volumeInput.setBackground(getResources().getDrawable(edittext_border));
+        volumeInput.setCursorVisible(false);
+        volumeInput.setHint("5");
+        volumeInput.setTextColor(Color.parseColor("#000000"));
+        volumeInput.setHintTextColor(Color.parseColor("#FFBCBCBC"));
+        volumeInput.setTextSize(20);
+
+        rowOG.addView(volume);
+        rowOG.addView(volumeInput);
+        layout.addView(rowOG);
+
+        // Create TableRow
+        TableRow rowTG = new TableRow(this);
+        rowTG.setLayoutParams(params1);
+        rowTG.setPadding(10, 10, 10, 10);
+
+        // Create TextView for Beer Style
+        TextView style = new TextView(this);
+        style.setLayoutParams(params2);
+        style.setGravity(Gravity.CENTER);
+        style.setText("Beer Style");
+        style.setTypeface(Typeface.DEFAULT_BOLD);
+        style.setTextColor(Color.parseColor("#000000"));
+        style.setTextSize(20);
+
+        // Create TextView for TG Input
+        EditText styleInput = new EditText(this);
+        styleInput.setLayoutParams(params3);
+        styleInput.setGravity(Gravity.CENTER);
+        styleInput.setBackground(getResources().getDrawable(edittext_border));
+        styleInput.setCursorVisible(false);
+        styleInput.setHint("American IPA");
+        styleInput.setTextColor(Color.parseColor("#000000"));
+        styleInput.setHintTextColor(Color.parseColor("#FFBCBCBC"));
+        styleInput.setTextSize(20);
+
+        rowTG.addView(style);
+        rowTG.addView(styleInput);
+        layout.addView(rowTG);
+
+        dialog.setView(layout);
         dialog.show();
     }
 
