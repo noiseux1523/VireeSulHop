@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import static com.example.noiseux1523.vireesulhop.R.drawable.edittext_border;
+import static com.example.noiseux1523.vireesulhop.R.drawable.toast_border;
 
 public class Outils extends AppCompatActivity {
 
@@ -78,7 +80,6 @@ public class Outils extends AppCompatActivity {
         });
 
     }
-
     public void celsiusToFarenheit() {
         // Create AlertDialog
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -89,6 +90,7 @@ public class Outils extends AppCompatActivity {
         title.setGravity(Gravity.CENTER);
         title.setTextColor(Color.WHITE);
         title.setTextSize(20);
+        title.setTypeface(Typeface.DEFAULT_BOLD);
         dialog.setCustomTitle(title);
 
         // Create ScrollView (whole dialog)
@@ -99,6 +101,38 @@ public class Outils extends AppCompatActivity {
         LinearLayout layout = new LinearLayout(this);
         layout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         layout.setOrientation(LinearLayout.VERTICAL);
+
+        // COLUMNS HEADERS
+        // Create TableRow (rows containing height and volume)
+        TableRow Hrow = new TableRow(this);
+        TableRow.LayoutParams Hparams1 = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT, 2f);
+        Hrow.setLayoutParams(Hparams1);
+
+        // Create TextView for celsius
+        TextView HC = new TextView(this);
+        TableRow.LayoutParams Hparams2 = new TableRow.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f);
+        HC.setLayoutParams(Hparams2);
+        HC.setGravity(Gravity.CENTER);
+        HC.setText("cm");
+        HC.setTextSize(20);
+
+        // Create TextView for farenheit
+        TextView HF = new TextView(this);
+        TableRow.LayoutParams Hparams3 = new TableRow.LayoutParams(0, LayoutParams.MATCH_PARENT, 1f);
+        HF.setLayoutParams(Hparams3);
+        HF.setGravity(Gravity.CENTER);
+        HF.setText("L");
+        HF.setTextSize(20);
+
+        // Row color
+        Hrow.setBackgroundResource(R.color.white);
+        Hrow.setBackgroundResource(R.color.background_color);
+        HC.setTextColor(Color.parseColor("#FFFFFF"));
+        HF.setTextColor(Color.parseColor("#FFFFFF"));
+
+        Hrow.addView(HC);
+        Hrow.addView(HF);
+        layout.addView(Hrow);
 
         for (int i = 0; i < 40; i++) {
             // Create TableRow (rows containing height and volume)
@@ -320,54 +354,63 @@ public class Outils extends AppCompatActivity {
         rowAdjusted.setLayoutParams(params1);
         rowAdjusted.setPadding(10, 10, 10, 10);
 
-        // Create TextView for AG
-        TextView ag = new TextView(this);
-        ag.setLayoutParams(params2);
-        ag.setGravity(Gravity.CENTER);
-        ag.setText("Adjusted Gravity");
-        ag.setTypeface(Typeface.DEFAULT_BOLD);
-        ag.setTextColor(Color.parseColor("#FF99CC00"));
-        ag.setTextSize(20);
-
-        // Create TextView for AG Input
-        final TextView agInput = new TextView(this);
-        agInput.setLayoutParams(params3);
-        agInput.setGravity(Gravity.CENTER);
-        agInput.setTextColor(Color.parseColor("#FF99CC00"));
-        agInput.setTextSize(20);
-
-        rowAdjusted.addView(ag);
-        rowAdjusted.addView(agInput);
-        layout.addView(rowAdjusted);
-
         dialog.setView(layout);
 
         dialog.setPositiveButton("Calculate", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
-                    if ((sgInput != null) && (recTempInput != null) && (calTempInput != null)) {
+                    if ((!sgInput.equals(null)) && (!recTempInput.equals(null)) && (!calTempInput.equals(null))) {
+                        // Format values
                         double sg = Double.parseDouble(String.valueOf(sgInput.getText()));
                         double recTemp = Double.parseDouble(String.valueOf(recTempInput.getText()));
                         double calTemp = Double.parseDouble(String.valueOf(calTempInput.getText()));
-
                         double recTempF = (recTemp*1.8)+32;
                         double calTempF = (calTemp*1.8)+32;
 
+                        // Formula
                         double correctedGravity = sg * ((1.00130346 - 0.000134722124 * recTempF + 0.00000204052596 * Math.pow(recTempF,2) - 0.00000000232820948 * Math.pow(recTempF,3) / (1.00130346 - 0.000134722124 * calTempF + 0.00000204052596 * Math.pow(calTempF,2) - 0.00000000232820948 * Math.pow(calTempF,3))));
-                        agInput.setText(correctedGravity+"");
+
+                        // Custom toast view
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+                        TextView layout = new TextView(Outils.this);
+                        layout.setTextColor(Color.parseColor("#000000"));
+                        layout.setTypeface(Typeface.DEFAULT_BOLD);
+                        layout.setTextSize(22);
+                        layout.setPadding(15, 15, 15, 15);
+                        layout.setLayoutParams(params);
+                        layout.setGravity(Gravity.CENTER);
+                        layout.setMaxLines(4);
+                        layout.setText("Initial Gravity" + "\n" + String.format("%.4f", sg) + "\n" + "Corrected Gravity" + "\n" + String.format("%.4f", correctedGravity));
+                        layout.setBackground(getResources().getDrawable(toast_border));
+
+                        // Create and customize toast
+                        Toast toast = new Toast(Outils.this);
+                        toast.setView(layout);
+                        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        toast.setDuration(Toast.LENGTH_LONG);
+
+                        toast.show();
 
                     } else {
                         Toast.makeText(Outils.this,
                                 "You are missing information!", Toast.LENGTH_LONG).show();
                     }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
-        dialog.show();
+        AlertDialog alert = dialog.create();
+        alert.show();
+
+        Button pButton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
+        pButton.setTextColor(Color.parseColor("#FF99CC00"));
+        pButton.setGravity(Gravity.CENTER);
+        pButton.setTextSize(20);
+        pButton.setTypeface(Typeface.DEFAULT_BOLD);
     }
 
     public void gravityAdjust() {
@@ -408,7 +451,7 @@ public class Outils extends AppCompatActivity {
         volume.setTextSize(20);
 
         // Create TextView for Volume Input
-        EditText volumeInput = new EditText(this);
+        final EditText volumeInput = new EditText(this);
         volumeInput.setLayoutParams(params3);
         volumeInput.setGravity(Gravity.CENTER);
         volumeInput.setBackground(getResources().getDrawable(edittext_border));
@@ -437,7 +480,7 @@ public class Outils extends AppCompatActivity {
         og.setTextSize(20);
 
         // Create TextView for OG Input
-        EditText ogInput = new EditText(this);
+        final EditText ogInput = new EditText(this);
         ogInput.setLayoutParams(params3);
         ogInput.setGravity(Gravity.CENTER);
         ogInput.setBackground(getResources().getDrawable(edittext_border));
@@ -466,7 +509,7 @@ public class Outils extends AppCompatActivity {
         tg.setTextSize(20);
 
         // Create TextView for TG Input
-        EditText tgInput = new EditText(this);
+        final EditText tgInput = new EditText(this);
         tgInput.setLayoutParams(params3);
         tgInput.setGravity(Gravity.CENTER);
         tgInput.setBackground(getResources().getDrawable(edittext_border));
@@ -481,7 +524,69 @@ public class Outils extends AppCompatActivity {
         layout.addView(rowTG);
 
         dialog.setView(layout);
-        dialog.show();
+
+        dialog.setPositiveButton("Calculate", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    if ((!volumeInput.equals(null)) && (!ogInput.equals(null)) && (!tgInput.equals(null))) {
+                        // Format values
+                        double volume = Double.parseDouble(String.valueOf(volumeInput.getText()));
+                        double og = Double.parseDouble(String.valueOf(ogInput.getText()));
+                        double tg = Double.parseDouble(String.valueOf(tgInput.getText()));
+                        double volumeGal = volume*0.264172;
+
+                        // Custom toast view
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+                        TextView layout = new TextView(Outils.this);
+                        layout.setTextColor(Color.parseColor("#000000"));
+                        layout.setTypeface(Typeface.DEFAULT_BOLD);
+                        layout.setTextSize(22);
+                        layout.setPadding(15, 15, 15, 15);
+                        layout.setLayoutParams(params);
+                        layout.setGravity(Gravity.CENTER);
+                        layout.setMaxLines(2);
+                        layout.setBackground(getResources().getDrawable(toast_border));
+
+                        // Formula
+                        if (og >= tg) {
+                            double water = (volume*((og-1)/(tg-1)))-volume;
+                            layout.setText("Water To Add" + "\n" +
+                                    String.format("%.3f", water) + " L" + "\n");
+                        } else {
+                            double DMEPounds = 1000*volumeGal*((tg-1)-(og-1))/44;
+                            double DME = DMEPounds*453.592;
+                            layout.setText("Extract To Add" + "\n" +
+                                    String.format("%.0f", DME) + " g" + "\n");
+                        }
+
+                        // Create and customize toast
+                        Toast toast = new Toast(Outils.this);
+                        toast.setView(layout);
+                        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        toast.setDuration(Toast.LENGTH_LONG);
+
+                        toast.show();
+
+                    } else {
+                        Toast.makeText(Outils.this,
+                                "You are missing information!", Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        AlertDialog alert = dialog.create();
+        alert.show();
+
+        Button pButton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
+        pButton.setTextColor(Color.parseColor("#FF99CC00"));
+        pButton.setGravity(Gravity.CENTER);
+        pButton.setTextSize(20);
+        pButton.setTypeface(Typeface.DEFAULT_BOLD);
     }
 
     public void sugarPriming() {
