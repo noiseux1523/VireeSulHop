@@ -2,8 +2,11 @@ package com.example.noiseux1523.vireesulhop;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentSender;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,24 +24,55 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.drive.Drive;
+import com.google.android.gms.drive.DriveApi;
+import com.google.android.gms.drive.DriveContents;
+import com.google.android.gms.drive.DriveFile;
+import com.google.android.gms.drive.DriveFolder;
+import com.google.android.gms.drive.DriveId;
+import com.google.android.gms.drive.MetadataChangeSet;
+import com.google.android.gms.drive.OpenFileActivityBuilder;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.noiseux1523.vireesulhop.R.drawable.comment_border;
 import static com.example.noiseux1523.vireesulhop.R.drawable.edittext_border;
 import static com.example.noiseux1523.vireesulhop.R.drawable.toast_border;
 
-public class Procedure extends AppCompatActivity {
-    private static final String TAG = "Read internal file";
+public class Procedure extends AppCompatActivity implements
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
+
+    private static final String TAGREAD = "Read internal file";
     // Option TextViews
     private ImageButton tools;
     private ImageButton save;
     private ImageButton edit;
     private String comments = "Commentaires";
+    private String saveFileName = "";
+    private String currentFile = "";
+
+    private static final String TAG = "Google Drive Activity";
+    private static final int REQUEST_CODE_RESOLUTION = 1;
+    private static final  int REQUEST_CODE_OPENER = 2;
+    private GoogleApiClient mGoogleApiClient;
+    private boolean fileOperation = false;
+    private DriveId mFileId;
+    public DriveFile file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +91,7 @@ public class Procedure extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                chooseFileToSave();
             }
         });
 
@@ -65,48 +99,25 @@ public class Procedure extends AppCompatActivity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                optionEdit();
+                chooseFileToEdit();
             }
         });
+
+        /**
+         * Create the API client and bind it to an instance variable.
+         * We use this instance as the callback for connection and connection failures.
+         * Since no account name is passed, the user is prompted to choose.
+         */
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Drive.API)
+                .addScope(Drive.SCOPE_FILE)
+                .addConnectionCallbacks((GoogleApiClient.ConnectionCallbacks) this)
+                .addOnConnectionFailedListener((GoogleApiClient.OnConnectionFailedListener) this)
+                .build();
     }
 
-    public void optionTools() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Tools");
-        builder.setItems(new CharSequence[]{"Celsius to Farenheit",
-                                            "Height to Volume",
-                                            "Gravity Adjust",
-                                            "Hydrometer Adjust",
-                                            "Sugar Priming"},
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // The 'which' argument contains the index position
-                        // of the selected item
-                        switch (which) {
-                            case 0:
-                                celsiusToFarenheit();
-                                break;
-                            case 1:
-                                heightToVolume();
-                                break;
-                            case 2:
-                                gravityAdjust();
-                                break;
-                            case 3:
-                                hydrometerAdjust();
-                                break;
-                            case 4:
-                                sugarPriming();
-                                break;
-                        }
-                    }
-                });
-        builder.create().show();
-    }
-
-    public void saveToFile() throws IOException {
+    public void saveToFile(String filename) throws IOException {
         // Assign file name and string to save
-        String filename = "myfile";
         String string = comments;
 
         // Open file and write the comments
@@ -130,20 +141,97 @@ public class Procedure extends AppCompatActivity {
         }
     }
 
+    public void chooseFileToEdit() {
+        // Decide which file to edit
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Files");
+
+        // Get all files in directory
+        String path = String.valueOf(getFilesDir());
+        File directory = new File(path);
+        final File[] files = directory.listFiles();
+        List<String> allFilesTmp = new ArrayList<String>();
+        for (int i = 0; i < files.length; i++)
+        {
+            allFilesTmp.add(i, files[i].getName());
+        }
+        CharSequence[] allFiles = allFilesTmp.toArray(new CharSequence[allFilesTmp.size()]);
+        builder.setItems(allFiles,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The 'which' argument contains the index position
+                        // of the selected item
+                        String filename = files[which].getName();
+                        optionEdit(filename);
+                    }
+                });
+        builder.create().show();
+    }
+
+    public void chooseFileToSave() {
+        // Decide which file to edit
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Files");
+
+        // Get all files in directory
+        String path = String.valueOf(getFilesDir());
+        File directory = new File(path);
+        final File[] files = directory.listFiles();
+        List<String> allFilesTmp = new ArrayList<String>();
+        for (int i = 0; i < files.length; i++)
+        {
+            allFilesTmp.add(i, files[i].getName());
+        }
+        CharSequence[] allFiles = allFilesTmp.toArray(new CharSequence[allFilesTmp.size()]);
+        builder.setItems(allFiles,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The 'which' argument contains the index position
+                        // of the selected item
+                        String filename = files[which].getName();
+                        optionSave(filename);
+                    }
+                });
+        builder.create().show();
+    }
+
     //
     // ADD OPTION TO DECIDE THE NAME OF THE FILE TO SAVE IF NEW FILE
     // ADD OPTION TO DECIDE WHICH FILE TO SAVE AND OVERWRITE IF EXISTING FILE
     // DO THIS FOR THE FILES IN THE DRIVE, NOT THE LOCAL PHONE FILE
     //
-    // ADD OPTION TO DECIDE WHICH FILE TO EDIT
-    //
 
-    public void optionEdit() {
+    public void optionSave(final String filename) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Menu");
+        builder.setItems(new CharSequence[]{
+                        "Create New File",
+                        "Overwrite Existing File"},
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The 'which' argument contains the index position
+                        // of the selected item
+                        switch (which) {
+                            case 0:
+                                currentFile = filename;
+                                onClickCreateFile();
+                                break;
+                            case 1:
+                                onClickOpenFile();
+                                break;
+                        }
+                    }
+                });
+        builder.create().show();
+
+    }
+
+    public void optionEdit(final String filename) {
         // Initialize reader and file to read
         BufferedReader input = null;
         File file = null;
         try {
-            file = new File(getFilesDir(), "myfile"); // Pass getFilesDir() and "myfile" to read file
+            file = new File(getFilesDir(), filename);
 
             // Read line by line the file. Add a new line after each line read,
             // otherwise they aren't added.
@@ -157,7 +245,7 @@ public class Procedure extends AppCompatActivity {
 
             // Update the comments string and log
             comments = buffer.toString();
-            Log.d(TAG, buffer.toString());
+            Log.d(TAGREAD, buffer.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -186,7 +274,7 @@ public class Procedure extends AppCompatActivity {
 
                 // Save the edit to the file
                 try {
-                    saveToFile();
+                    saveToFile(filename);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -201,6 +289,40 @@ public class Procedure extends AppCompatActivity {
         });
 
         builder.show();
+    }
+
+    public void optionTools() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Tools");
+        builder.setItems(new CharSequence[]{"Celsius to Farenheit",
+                        "Height to Volume",
+                        "Gravity Adjust",
+                        "Hydrometer Adjust",
+                        "Sugar Priming"},
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The 'which' argument contains the index position
+                        // of the selected item
+                        switch (which) {
+                            case 0:
+                                celsiusToFarenheit();
+                                break;
+                            case 1:
+                                heightToVolume();
+                                break;
+                            case 2:
+                                gravityAdjust();
+                                break;
+                            case 3:
+                                hydrometerAdjust();
+                                break;
+                            case 4:
+                                sugarPriming();
+                                break;
+                        }
+                    }
+                });
+        builder.create().show();
     }
 
     public void celsiusToFarenheit() {
@@ -793,4 +915,291 @@ public class Procedure extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Called when the activity will start interacting with the user.
+     * At this point your activity is at the top of the activity stack,
+     * with user input going to it.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mGoogleApiClient == null) {
+
+        }
+
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStart() {
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        }
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        if (mGoogleApiClient != null) {
+            // disconnect Google Android Drive API connection.
+            mGoogleApiClient.disconnect();
+        }
+        super.onStop();
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+
+        // Called whenever the API client fails to connect.
+        Log.i(TAG, "GoogleApiClient connection failed: " + result.toString());
+
+        if (!result.hasResolution()) {
+
+            // show the localized error dialog.
+            GoogleApiAvailability.getInstance().getErrorDialog(this, result.getErrorCode(), 0).show();
+            return;
+        }
+
+        /**
+         *  The failure has a resolution. Resolve it.
+         *  Called typically when the app is not yet authorized, and an  authorization
+         *  dialog is displayed to the user.
+         */
+
+        try {
+
+            result.startResolutionForResult(this, REQUEST_CODE_RESOLUTION);
+
+        } catch (IntentSender.SendIntentException e) {
+
+            Log.e(TAG, "Exception while starting resolution activity", e);
+        }
+    }
+
+    /**
+     * It invoked when Google API client connected
+     * @param connectionHint
+     */
+    @Override
+    public void onConnected(Bundle connectionHint) {
+
+        Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * It invoked when connection suspended
+     * @param cause
+     */
+    @Override
+    public void onConnectionSuspended(int cause) {
+
+        Log.i(TAG, "GoogleApiClient connection suspended");
+    }
+
+    public void onClickCreateFile(){
+        fileOperation = true;
+
+        // Create save window
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        // Save Name
+        TextView fileNameTitle = new TextView(this);
+        fileNameTitle.setText("File Name");
+        fileNameTitle.setTextColor(Color.BLACK);
+        fileNameTitle.setTextSize(16);
+        fileNameTitle.setPadding(0, 15, 0, 0);
+        fileNameTitle.setGravity(Gravity.CENTER);
+        layout.addView(fileNameTitle);
+
+        final EditText saveName = new EditText(this);
+        saveName.setTextSize(16);
+        layout.addView(saveName);
+        dialog.setView(layout);
+
+        dialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Get file name
+                saveFileName = saveName.getText().toString();
+                if (saveFileName != null && saveFileName.length() != 0) {
+                    // create new file
+                    Drive.DriveApi.newDriveContents(mGoogleApiClient)
+                            .setResultCallback(driveContentsCallback);
+                } else {
+                    Toast toast = Toast.makeText(Procedure.this,
+                            "Enter a valid name", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Dismiss window
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    public void onClickOpenFile(){
+        fileOperation = false;
+
+        // create new contents resource
+        Drive.DriveApi.newDriveContents(mGoogleApiClient)
+                .setResultCallback(driveContentsCallback);
+    }
+
+    /**
+     *  Open list of folder and file of the Google Drive
+     */
+    public void OpenFileFromGoogleDrive(){
+
+        IntentSender intentSender = Drive.DriveApi
+                .newOpenFileActivityBuilder()
+                .setMimeType(new String[] { "text/plain", "text/html" })
+                .build(mGoogleApiClient);
+        try {
+            startIntentSenderForResult(
+
+                    intentSender, REQUEST_CODE_OPENER, null, 0, 0, 0);
+
+        } catch (IntentSender.SendIntentException e) {
+
+            Log.w(TAG, "Unable to send intent", e);
+        }
+
+    }
+
+    /**
+     * This is Result result handler of Drive contents.
+     * this callback method call CreateFileOnGoogleDrive() method
+     * and also call OpenFileFromGoogleDrive() method,
+     * send intent onActivityResult() method to handle result.
+     */
+    final ResultCallback<DriveApi.DriveContentsResult> driveContentsCallback =
+            new ResultCallback<DriveApi.DriveContentsResult>() {
+                @Override
+                public void onResult(DriveApi.DriveContentsResult result) {
+
+                    if (result.getStatus().isSuccess()) {
+
+                        if (fileOperation == true) {
+
+                            CreateFileOnGoogleDrive(result);
+
+                        } else {
+
+                            OpenFileFromGoogleDrive();
+
+                        }
+                    }
+
+                }
+            };
+
+    /**
+     * Create a file in root folder using MetadataChangeSet object.
+     * @param result
+     */
+    public void CreateFileOnGoogleDrive(DriveApi.DriveContentsResult result){
+
+        final DriveContents driveContents = result.getDriveContents();
+
+        // Perform I/O off the UI thread.
+        new Thread() {
+            @Override
+            public void run() {
+                // Write content to DriveContents
+                BufferedReader input = null;
+                File file = null;
+                try {
+                    file = new File(getFilesDir(), currentFile);
+
+                    // Read line by line the file. Add a new line after each line read,
+                    // otherwise they aren't added.
+                    input = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+                    String line;
+                    OutputStream outputStream = driveContents.getOutputStream();
+                    Writer writer = new OutputStreamWriter(outputStream);
+                    while ((line = input.readLine()) != null) {
+                        writer.write(line);
+                        writer.write("\n");
+                    }
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
+                        .setTitle(saveFileName)
+                        .setMimeType("text/plain")
+                        .setStarred(true).build();
+
+                // create a file in root folder
+                Drive.DriveApi.getRootFolder(mGoogleApiClient)
+                        .createFile(mGoogleApiClient, changeSet, driveContents)
+                        .setResultCallback(fileCallback);
+            }
+        }.start();
+    }
+
+    /**
+     * Handle result of Created file
+     */
+    final private ResultCallback<DriveFolder.DriveFileResult> fileCallback = new
+            ResultCallback<DriveFolder.DriveFileResult>() {
+                @Override
+                public void onResult(DriveFolder.DriveFileResult result) {
+                    if (result.getStatus().isSuccess()) {
+
+                        Toast.makeText(getApplicationContext(), "file created: "+""+
+                                result.getDriveFile().getDriveId(), Toast.LENGTH_LONG).show();
+
+                    }
+
+                    return;
+
+                }
+            };
+
+    /**
+     *  Handle Response of selected file
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(final int requestCode,
+                                    final int resultCode, final Intent data) {
+        switch (requestCode) {
+
+            case REQUEST_CODE_OPENER:
+
+                if (resultCode == RESULT_OK) {
+
+                    mFileId = (DriveId) data.getParcelableExtra(
+                            OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
+
+                    Log.e("file id", mFileId.getResourceId() + "");
+
+                    String url = "https://drive.google.com/open?id="+ mFileId.getResourceId();
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }
+
+                break;
+
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
+    }
+
 }
+
