@@ -1,71 +1,76 @@
 package com.example.noiseux1523.vireesulhop;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import static com.example.noiseux1523.vireesulhop.R.drawable.comment_border;
 import static com.example.noiseux1523.vireesulhop.R.drawable.edittext_border;
 import static com.example.noiseux1523.vireesulhop.R.drawable.toast_border;
 
 public class Procedure extends AppCompatActivity {
+    private static final String TAG = "Read internal file";
     // Option TextViews
-    private TextView option1;
-    private TextView option2;
-    private TextView option3;
-    private TextView option4;
+    private ImageButton tools;
+    private ImageButton save;
+    private ImageButton edit;
+    private String comments = "Commentaires";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_procedure);
 
-        option1 = (TextView)findViewById(R.id.option_1);
-        option1.setOnClickListener(new View.OnClickListener() {
+        tools = (ImageButton)findViewById(R.id.tools);
+        tools.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                optionMenu();
+                optionTools();
             }
         });
 
-        option2 = (TextView)findViewById(R.id.option_2);
-        option2.setOnClickListener(new View.OnClickListener() {
+        save = (ImageButton)findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                optionMenu();
+
             }
         });
 
-        option3 = (TextView)findViewById(R.id.option_3);
-        option3.setOnClickListener(new View.OnClickListener() {
+        edit = (ImageButton)findViewById(R.id.edit);
+        edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                optionMenu();
-            }
-        });
-
-        option4 = (TextView)findViewById(R.id.option_4);
-        option4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                optionMenu();
+                optionEdit();
             }
         });
     }
 
-    public void optionMenu() {
+    public void optionTools() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Tools");
         builder.setItems(new CharSequence[]{"Celsius to Farenheit",
@@ -97,6 +102,105 @@ public class Procedure extends AppCompatActivity {
                     }
                 });
         builder.create().show();
+    }
+
+    public void saveToFile() throws IOException {
+        // Assign file name and string to save
+        String filename = "myfile";
+        String string = comments;
+
+        // Open file and write the comments
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(string.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String path = String.valueOf(getFilesDir());
+        Log.d("Files", "Path: " + path);
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        Log.d("Files", "Size: "+ files.length);
+        for (int i = 0; i < files.length; i++)
+        {
+            Log.d("Files", "FileName:" + files[i].getName());
+        }
+    }
+
+    //
+    // ADD OPTION TO DECIDE THE NAME OF THE FILE TO SAVE IF NEW FILE
+    // ADD OPTION TO DECIDE WHICH FILE TO SAVE AND OVERWRITE IF EXISTING FILE
+    // DO THIS FOR THE FILES IN THE DRIVE, NOT THE LOCAL PHONE FILE
+    //
+    // ADD OPTION TO DECIDE WHICH FILE TO EDIT
+    //
+
+    public void optionEdit() {
+        // Initialize reader and file to read
+        BufferedReader input = null;
+        File file = null;
+        try {
+            file = new File(getFilesDir(), "myfile"); // Pass getFilesDir() and "myfile" to read file
+
+            // Read line by line the file. Add a new line after each line read,
+            // otherwise they aren't added.
+            input = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+            String line;
+            StringBuffer buffer = new StringBuffer();
+            while ((line = input.readLine()) != null) {
+                buffer.append(line);
+                buffer.append("\n");
+            }
+
+            // Update the comments string and log
+            comments = buffer.toString();
+            Log.d(TAG, buffer.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Create dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Commentaires");
+
+        // Set up the input
+        final EditText inputBox = new EditText(this);
+        inputBox.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        inputBox.setText(comments);
+        inputBox.setWidth(391);
+        inputBox.setHeight(523);
+        inputBox.setGravity(Gravity.TOP);
+        inputBox.setBackground(getResources().getDrawable(comment_border));
+        inputBox.setPadding(10, 10, 10, 10);
+        builder.setView(inputBox);
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Read the text box and update the comments string
+                comments = inputBox.getText().toString();
+
+                // Save the edit to the file
+                try {
+                    saveToFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Save nothing and exit
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     public void celsiusToFarenheit() {

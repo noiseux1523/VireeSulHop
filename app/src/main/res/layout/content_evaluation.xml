@@ -16,7 +16,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Create a file on Google Drive"
-    android:onClick="onClickCreateMethod"/>
+    android:onClick="onClickCreateFile"/>
 
     <Button
     android:id="@+id/openfile"
@@ -24,7 +24,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Open file from Google Drive"
-    android:onClick="onClickOpenFileMethod"/>
+    android:onClick="onClickOpenFile"/>
 
 
 </LinearLayout>

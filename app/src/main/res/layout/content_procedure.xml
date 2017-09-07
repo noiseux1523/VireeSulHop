@@ -47,18 +47,6 @@
                 android:layout_weight="4"
                 android:textStyle="normal|bold" />
 
-            <TextView
-                android:text="+"
-                android:id="@+id/option_1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="26sp"
-                android:layout_margin="2dp"
-                android:textColor="@color/button_color"
-                android:layout_weight="1"
-                android:textStyle="normal|bold"/>
-
             </LinearLayout>
 
 
@@ -529,18 +517,6 @@
                     android:textColor="@color/button_color"
                     android:textStyle="normal|bold"/>
 
-                <TextView
-                    android:text="+"
-                    android:id="@+id/option_2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textSize="26sp"
-                    android:layout_margin="2dp"
-                    android:textColor="@color/button_color"
-                    android:layout_weight="1"
-                    android:textStyle="normal|bold"/>
-
             </LinearLayout>
 
             <LinearLayout
@@ -947,18 +923,6 @@
                     android:layout_margin="2dp"
                     android:id="@+id/finalsteps"
                     android:textColor="@color/button_color"
-                    android:textStyle="normal|bold"/>
-
-                <TextView
-                    android:text="+"
-                    android:id="@+id/option_3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textSize="26sp"
-                    android:layout_margin="2dp"
-                    android:textColor="@color/button_color"
-                    android:layout_weight="1"
                     android:textStyle="normal|bold"/>
 
             </LinearLayout>
@@ -1480,18 +1444,6 @@
                     android:textColor="@color/button_color"
                     android:textStyle="normal|bold"/>
 
-                <TextView
-                    android:text="+"
-                    android:id="@+id/option_4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textSize="26sp"
-                    android:layout_margin="2dp"
-                    android:textColor="@color/button_color"
-                    android:layout_weight="1"
-                    android:textStyle="normal|bold"/>
-
             </LinearLayout>
 
             <LinearLayout
@@ -1881,5 +1833,40 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/show_pdf"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/menu_border"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/tools"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:src="@android:drawable/ic_menu_preferences"/>
+
+        <ImageButton
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:src="@android:drawable/ic_menu_save"/>
+
+        <ImageButton
+            android:id="@+id/edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:src="@android:drawable/ic_menu_edit"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

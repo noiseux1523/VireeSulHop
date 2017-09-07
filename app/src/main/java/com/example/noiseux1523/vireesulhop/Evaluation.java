@@ -42,6 +42,18 @@ public class Evaluation extends AppCompatActivity implements GoogleApiClient.Con
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluation);
+
+        /**
+         * Create the API client and bind it to an instance variable.
+         * We use this instance as the callback for connection and connection failures.
+         * Since no account name is passed, the user is prompted to choose.
+         */
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Drive.API)
+                .addScope(Drive.SCOPE_FILE)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
     }
 
     /**
@@ -54,17 +66,6 @@ public class Evaluation extends AppCompatActivity implements GoogleApiClient.Con
         super.onResume();
         if (mGoogleApiClient == null) {
 
-            /**
-             * Create the API client and bind it to an instance variable.
-             * We use this instance as the callback for connection and connection failures.
-             * Since no account name is passed, the user is prompted to choose.
-             */
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addApi(Drive.API)
-                    .addScope(Drive.SCOPE_FILE)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .build();
         }
 
         mGoogleApiClient.connect();
