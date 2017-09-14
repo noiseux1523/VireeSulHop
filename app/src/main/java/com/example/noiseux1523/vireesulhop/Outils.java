@@ -25,6 +25,7 @@ public class Outils extends AppCompatActivity {
     // Button Variables
     private TextView FtoC;
     private TextView HtoV;
+    private TextView GtoL;
     private TextView gravity;
     private TextView hydrometer;
     private TextView sugar;
@@ -49,6 +50,15 @@ public class Outils extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 heightToVolume();
+            }
+        });
+
+        //
+        GtoL = (TextView)findViewById(R.id.GtoL);
+        GtoL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gallonToLiter();
             }
         });
 
@@ -231,6 +241,70 @@ public class Outils extends AppCompatActivity {
 
             row.addView(H);
             row.addView(V);
+            layout.addView(row);
+        }
+
+        scroll.addView(layout);
+        dialog.setView(scroll);
+        dialog.show();
+    }
+
+    public void gallonToLiter() {
+        // Create AlertDialog
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        TextView title = new TextView(this);
+        title.setText("Gallon to Liter");
+        title.setBackgroundColor(Color.DKGRAY);
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(22);
+        dialog.setCustomTitle(title);
+
+        // Create ScrollView (whole dialog)
+        ScrollView scroll = new ScrollView(this);
+        scroll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+        // Create LinearLayout (whole dialog, in ScrollView)
+        LinearLayout layout = new LinearLayout(this);
+        layout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        for (int i = 0; i < 40; i++) {
+            // Create TableRow (rows containing height and volume)
+            TableRow row = new TableRow(this);
+            TableRow.LayoutParams params1 = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT, 2f);
+            row.setLayoutParams(params1);
+
+            // Create TextView for height
+            TextView G = new TextView(this);
+            TableRow.LayoutParams params2 = new TableRow.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f);
+            G.setLayoutParams(params2);
+            G.setGravity(Gravity.CENTER);
+            double gallon = ((double) i)/4+0.25;
+            G.setText(String.format("%.2f", gallon));
+            G.setTextSize(20);
+
+            // Create TextView for volume
+            TextView L = new TextView(this);
+            TableRow.LayoutParams params3 = new TableRow.LayoutParams(0, LayoutParams.MATCH_PARENT, 1f);
+            L.setLayoutParams(params3);
+            L.setGravity(Gravity.CENTER);
+            double liter = 3.78541*gallon;
+            L.setText(String.format("%.2f", liter));
+            L.setTextSize(20);
+
+            // To alternate colors
+            if ((i & 1) == 0) {
+                row.setBackgroundResource(R.color.white);
+            } else {
+                row.setBackgroundResource(R.color.background_color);
+                G.setTextColor(Color.parseColor("#FFFFFF"));
+                L.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+
+            row.addView(G);
+            row.addView(L);
             layout.addView(row);
         }
 

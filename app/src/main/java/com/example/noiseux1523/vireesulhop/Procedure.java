@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -49,7 +51,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.noiseux1523.vireesulhop.R.drawable.comment_border;
 import static com.example.noiseux1523.vireesulhop.R.drawable.edittext_border;
 import static com.example.noiseux1523.vireesulhop.R.drawable.toast_border;
 
@@ -57,7 +58,15 @@ public class Procedure extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
-    private static final String TAGREAD = "Read internal file";
+    // EditTexts to save
+    private EditText mashVolume;
+    private EditText preBoilGravity;
+    private EditText preBoilVolume;
+    private EditText originalGravity;
+    private EditText wortCollected;
+    private EditText finalGravity;
+    private EditText finalVolume;
+
     // Option TextViews
     private ImageButton tools;
     private ImageButton save;
@@ -66,6 +75,7 @@ public class Procedure extends AppCompatActivity implements
     private String saveFileName = "";
     private String currentFile = "";
 
+    private static final String TAGREAD = "Read internal file";
     private static final String TAG = "Google Drive Activity";
     private static final int REQUEST_CODE_RESOLUTION = 1;
     private static final  int REQUEST_CODE_OPENER = 2;
@@ -103,6 +113,16 @@ public class Procedure extends AppCompatActivity implements
             }
         });
 
+        mashVolume = (EditText) findViewById(R.id.editTextMashVolume);
+        preBoilGravity = (EditText) findViewById(R.id.editTextPreBoilGravity);
+        preBoilVolume = (EditText) findViewById(R.id.editTextPreBoilVolume);
+        originalGravity = (EditText) findViewById(R.id.editTextOriginalGravity);
+        wortCollected = (EditText) findViewById(R.id.editTextWortCollected);
+        finalGravity = (EditText) findViewById(R.id.editTextFinalGravity);
+        finalVolume = (EditText) findViewById(R.id.editTextFinalVolume);
+
+        loadSavedPreferences();
+
         /**
          * Create the API client and bind it to an instance variable.
          * We use this instance as the callback for connection and connection failures.
@@ -116,33 +136,60 @@ public class Procedure extends AppCompatActivity implements
                 .build();
     }
 
-    public void saveToFile(String filename) throws IOException {
-        // Assign file name and string to save
-        String string = comments;
+    private void loadSavedPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
 
-        // Open file and write the comments
-        FileOutputStream outputStream = null;
-        try {
-            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(string.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        mashVolume.setText(sharedPreferences.getString("string_mashVolume", ""));
+        preBoilGravity.setText(sharedPreferences.getString("string_preBoilGravity", ""));
+        preBoilVolume.setText(sharedPreferences.getString("string_preBoilVolume", ""));
+        originalGravity.setText(sharedPreferences.getString("string_originalGravity", ""));
+        wortCollected.setText(sharedPreferences.getString("string_wortCollected", ""));
+        finalGravity.setText(sharedPreferences.getString("string_finalGravity", ""));
+        finalVolume.setText(sharedPreferences.getString("string_finalVolume", ""));
+    }
 
-        String path = String.valueOf(getFilesDir());
-        Log.d("Files", "Path: " + path);
-        File directory = new File(path);
-        File[] files = directory.listFiles();
-        Log.d("Files", "Size: "+ files.length);
-        for (int i = 0; i < files.length; i++)
-        {
-            Log.d("Files", "FileName:" + files[i].getName());
-        }
+    private void savePreferences(String key, String value) {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    public void saveData(){
+        savePreferences("string_mashVolume", mashVolume.getText().toString());
+        savePreferences("string_preBoilGravity", preBoilGravity.getText().toString());
+        savePreferences("string_preBoilVolume", preBoilVolume.getText().toString());
+        savePreferences("string_originalGravity", originalGravity.getText().toString());
+        savePreferences("string_wortCollected", wortCollected.getText().toString());
+        savePreferences("string_finalGravity", finalGravity.getText().toString());
+        savePreferences("string_finalVolume", finalVolume.getText().toString());
+    }
+
+    public void clearData(){
+        savePreferences("string_mashVolume", "");
+        savePreferences("string_preBoilGravity", "");
+        savePreferences("string_preBoilVolume", "");
+        savePreferences("string_originalGravity", "");
+        savePreferences("string_wortCollected", "");
+        savePreferences("string_finalGravity", "");
+        savePreferences("string_finalVolume", "");
+    }
+
+    public void clearAll() {
+        clearData();
+        mashVolume.setText("");
+        preBoilGravity.setText("");
+        preBoilVolume.setText("");
+        originalGravity.setText("");
+        wortCollected.setText("");
+        finalGravity.setText("");
+        finalVolume.setText("");
     }
 
     public void chooseFileToEdit() {
-        // Decide which file to edit
+        // Create dialog window
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Files");
 
@@ -156,6 +203,8 @@ public class Procedure extends AppCompatActivity implements
             allFilesTmp.add(i, files[i].getName());
         }
         CharSequence[] allFiles = allFilesTmp.toArray(new CharSequence[allFilesTmp.size()]);
+
+        // Decide which file to edit
         builder.setItems(allFiles,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -165,65 +214,15 @@ public class Procedure extends AppCompatActivity implements
                         optionEdit(filename);
                     }
                 });
+        builder.setPositiveButton("New File", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                createNewEditFile();
+            }
+        });
+
+
         builder.create().show();
-    }
-
-    public void chooseFileToSave() {
-        // Decide which file to edit
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Files");
-
-        // Get all files in directory
-        String path = String.valueOf(getFilesDir());
-        File directory = new File(path);
-        final File[] files = directory.listFiles();
-        List<String> allFilesTmp = new ArrayList<String>();
-        for (int i = 0; i < files.length; i++)
-        {
-            allFilesTmp.add(i, files[i].getName());
-        }
-        CharSequence[] allFiles = allFilesTmp.toArray(new CharSequence[allFilesTmp.size()]);
-        builder.setItems(allFiles,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // The 'which' argument contains the index position
-                        // of the selected item
-                        String filename = files[which].getName();
-                        optionSave(filename);
-                    }
-                });
-        builder.create().show();
-    }
-
-    //
-    // ADD OPTION TO DECIDE THE NAME OF THE FILE TO SAVE IF NEW FILE
-    // ADD OPTION TO DECIDE WHICH FILE TO SAVE AND OVERWRITE IF EXISTING FILE
-    // DO THIS FOR THE FILES IN THE DRIVE, NOT THE LOCAL PHONE FILE
-    //
-
-    public void optionSave(final String filename) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Menu");
-        builder.setItems(new CharSequence[]{
-                        "Create New File",
-                        "Overwrite Existing File"},
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // The 'which' argument contains the index position
-                        // of the selected item
-                        switch (which) {
-                            case 0:
-                                currentFile = filename;
-                                onClickCreateFile();
-                                break;
-                            case 1:
-                                onClickOpenFile();
-                                break;
-                        }
-                    }
-                });
-        builder.create().show();
-
     }
 
     public void optionEdit(final String filename) {
@@ -261,7 +260,6 @@ public class Procedure extends AppCompatActivity implements
         inputBox.setWidth(391);
         inputBox.setHeight(523);
         inputBox.setGravity(Gravity.TOP);
-        inputBox.setBackground(getResources().getDrawable(comment_border));
         inputBox.setPadding(10, 10, 10, 10);
         builder.setView(inputBox);
 
@@ -291,14 +289,146 @@ public class Procedure extends AppCompatActivity implements
         builder.show();
     }
 
+    public void createNewEditFile() {
+        // Create save window
+        AlertDialog.Builder dialog1 = new AlertDialog.Builder(this);
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        // Save Name
+        TextView fileNameTitle = new TextView(this);
+        fileNameTitle.setText("File Name");
+        fileNameTitle.setTextColor(Color.BLACK);
+        fileNameTitle.setTextSize(16);
+        fileNameTitle.setPadding(0, 15, 0, 0);
+        fileNameTitle.setGravity(Gravity.CENTER);
+        layout.addView(fileNameTitle);
+
+        final EditText saveName = new EditText(this);
+        saveName.setTextSize(16);
+        layout.addView(saveName);
+        dialog1.setView(layout);
+
+        dialog1.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Create a file in the Internal Storage
+                String content = "";
+
+                FileOutputStream outputStream = null;
+                try {
+                    outputStream = openFileOutput(saveName.getText().toString(), Context.MODE_PRIVATE);
+                    outputStream.write(content.getBytes());
+                    outputStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        dialog1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Dismiss window
+            }
+        });
+
+        dialog1.show();
+    }
+
+    public void chooseFileToSave() {
+        // Decide which file to edit
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Files");
+
+        // Get all files in directory
+        String path = String.valueOf(getFilesDir());
+        File directory = new File(path);
+        final File[] files = directory.listFiles();
+        List<String> allFilesTmp = new ArrayList<String>();
+        for (int i = 0; i < files.length; i++)
+        {
+            allFilesTmp.add(i, files[i].getName());
+        }
+        CharSequence[] allFiles = allFilesTmp.toArray(new CharSequence[allFilesTmp.size()]);
+        builder.setItems(allFiles,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The 'which' argument contains the index position
+                        // of the selected item
+                        String filename = files[which].getName();
+                        optionSave(filename);
+                    }
+                });
+        builder.create().show();
+    }
+
+    public void saveToFile(String filename) throws IOException {
+        // Assign file name and string to save
+        String string = comments;
+
+        // Open file and write the comments
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(string.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String path = String.valueOf(getFilesDir());
+        Log.d("Files", "Path: " + path);
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        Log.d("Files", "Size: "+ files.length);
+        for (int i = 0; i < files.length; i++)
+        {
+            Log.d("Files", "FileName:" + files[i].getName());
+        }
+    }
+
+    //
+    // ADD OPTION TO DECIDE THE NAME OF THE FILE TO SAVE IF NEW FILE
+    // ADD OPTION TO DECIDE WHICH FILE TO SAVE AND OVERWRITE IF EXISTING FILE
+    // DO THIS FOR THE FILES IN THE DRIVE, NOT THE LOCAL PHONE FILE
+    //
+
+    public void optionSave(final String filename) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Menu");
+        builder.setItems(new CharSequence[]{
+                        "Create New File",
+                        "Overwrite Existing File"},
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The 'which' argument contains the index position
+                        // of the selected item
+                        switch (which) {
+                            case 0:
+                                currentFile = filename;
+                                onClickCreateFile();
+                                break;
+                            case 1:
+                                onClickOpenFile();
+                                break;
+                        }
+                    }
+                });
+        builder.create().show();
+
+    }
+
     public void optionTools() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Tools");
         builder.setItems(new CharSequence[]{"Celsius to Farenheit",
                         "Height to Volume",
+                        "Gallon to Liter",
                         "Gravity Adjust",
                         "Hydrometer Adjust",
-                        "Sugar Priming"},
+                        "Sugar Priming",
+                        "Clear All"},
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // The 'which' argument contains the index position
@@ -311,14 +441,19 @@ public class Procedure extends AppCompatActivity implements
                                 heightToVolume();
                                 break;
                             case 2:
-                                gravityAdjust();
+                                gallonToLiter();
                                 break;
                             case 3:
-                                hydrometerAdjust();
+                                gravityAdjust();
                                 break;
                             case 4:
+                                hydrometerAdjust();
+                                break;
+                            case 5:
                                 sugarPriming();
                                 break;
+                            case 6:
+                                clearAll();
                         }
                     }
                 });
@@ -443,6 +578,70 @@ public class Procedure extends AppCompatActivity implements
 
             row.addView(H);
             row.addView(V);
+            layout.addView(row);
+        }
+
+        scroll.addView(layout);
+        dialog.setView(scroll);
+        dialog.show();
+    }
+
+    public void gallonToLiter() {
+        // Create AlertDialog
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        TextView title = new TextView(this);
+        title.setText("Gallon to Liter");
+        title.setBackgroundColor(Color.DKGRAY);
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(22);
+        dialog.setCustomTitle(title);
+
+        // Create ScrollView (whole dialog)
+        ScrollView scroll = new ScrollView(this);
+        scroll.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        // Create LinearLayout (whole dialog, in ScrollView)
+        LinearLayout layout = new LinearLayout(this);
+        layout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        for (int i = 0; i < 40; i++) {
+            // Create TableRow (rows containing height and volume)
+            TableRow row = new TableRow(this);
+            TableRow.LayoutParams params1 = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2f);
+            row.setLayoutParams(params1);
+
+            // Create TextView for height
+            TextView G = new TextView(this);
+            TableRow.LayoutParams params2 = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
+            G.setLayoutParams(params2);
+            G.setGravity(Gravity.CENTER);
+            double gallon = ((double) i)/4+0.25;
+            G.setText(String.format("%.2f", gallon));
+            G.setTextSize(20);
+
+            // Create TextView for volume
+            TextView L = new TextView(this);
+            TableRow.LayoutParams params3 = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f);
+            L.setLayoutParams(params3);
+            L.setGravity(Gravity.CENTER);
+            double liter = 3.78541*gallon;
+            L.setText(String.format("%.2f", liter));
+            L.setTextSize(20);
+
+            // To alternate colors
+            if ((i & 1) == 0) {
+                row.setBackgroundResource(R.color.white);
+            } else {
+                row.setBackgroundResource(R.color.background_color);
+                G.setTextColor(Color.parseColor("#FFFFFF"));
+                L.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+
+            row.addView(G);
+            row.addView(L);
             layout.addView(row);
         }
 
@@ -915,6 +1114,12 @@ public class Procedure extends AppCompatActivity implements
         dialog.show();
     }
 
+    @Override
+    public void onBackPressed(){
+        saveData();
+        super.onBackPressed();
+    }
+
     /**
      * Called when the activity will start interacting with the user.
      * At this point your activity is at the top of the activity stack,
@@ -1120,12 +1325,25 @@ public class Procedure extends AppCompatActivity implements
                 try {
                     file = new File(getFilesDir(), currentFile);
 
-                    // Read line by line the file. Add a new line after each line read,
-                    // otherwise they aren't added.
                     input = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
                     String line;
                     OutputStream outputStream = driveContents.getOutputStream();
                     Writer writer = new OutputStreamWriter(outputStream);
+
+                    // Add brewing measures
+                    writer.write("### MESURES ###\n");
+                    writer.write(String.format("Mash Volume: %s\n", mashVolume.getText().toString()));
+                    writer.write(String.format("Pre Boil Gravity: %s\n", preBoilGravity.getText().toString()));
+                    writer.write(String.format("Pre Boil Volume: %s\n", preBoilVolume.getText().toString()));
+                    writer.write(String.format("Original Gravity: %s\n", originalGravity.getText().toString()));
+                    writer.write(String.format("Wort Collected: %s\n", wortCollected.getText().toString()));
+                    writer.write(String.format("Final Gravity: %s\n", finalGravity.getText().toString()));
+                    writer.write(String.format("Final Volume: %s\n", finalVolume.getText().toString()));
+                    writer.write("\n");
+
+                    // Read line by line the file. Add a new line after each line read,
+                    // otherwise they aren't added.
+                    writer.write("### COMMENTAIRES ###\n");
                     while ((line = input.readLine()) != null) {
                         writer.write(line);
                         writer.write("\n");

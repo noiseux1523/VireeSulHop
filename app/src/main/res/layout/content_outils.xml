@@ -10,16 +10,16 @@
     tools:context="com.example.noiseux1523.vireesulhop.Outils"
     tools:showIn="@layout/activity_outils"
     android:orientation="vertical"
-    android:weightSum="9">
+    android:weightSum="10">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:adjustViewBounds="false"
-                android:cropToPadding="true"
-                android:src="@drawable/logotitre"
-                android:scaleType="centerInside"
-                android:layout_weight="2" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="true"
+        android:src="@drawable/logotitre"
+        android:scaleType="centerInside"
+        android:layout_weight="2" />
 
     <TextView
         android:text="TABLES"
@@ -32,78 +32,91 @@
         android:layout_weight="1"/>
 
     <TextView
-                android:text="F to C"
-                android:id="@+id/FtoC"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:layout_margin="5dp"
-                android:height="40sp"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:background="@drawable/value_border"
-                android:layout_weight="1"/>
+        android:text="Farenheit to Celsius"
+        android:id="@+id/FtoC"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:height="40sp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:background="@drawable/value_border"
+        android:layout_weight="1"/>
 
-            <TextView
-                android:text="Height to Volume"
-                android:id="@+id/HtoV"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:layout_margin="5dp"
-                android:height="40sp"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:background="@drawable/value_border"
-                android:layout_weight="1"/>
+    <TextView
+        android:text="Height to Volume"
+        android:id="@+id/HtoV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:height="40sp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:background="@drawable/value_border"
+        android:layout_weight="1"/>
 
-            <TextView
-                android:text="CALCULATORS"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:textSize="26sp"
-                android:layout_margin="5dp"
-                android:textColor="@color/button_color"
-                android:layout_weight="1"/>
+    <TextView
+        android:text="Gallon to Liter"
+        android:id="@+id/GtoL"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:height="40sp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:background="@drawable/value_border"
+        android:layout_weight="1"/>
 
-            <TextView
-                android:text="Gravity Adjust"
-                android:id="@+id/gravity"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:layout_margin="5dp"
-                android:height="40sp"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:background="@drawable/value_border"
-                android:layout_weight="1"/>
+    <TextView
+        android:text="CALCULATORS"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="26sp"
+        android:layout_margin="5dp"
+        android:textColor="@color/button_color"
+        android:layout_weight="1"/>
 
-            <TextView
-                android:text="Hydrometer Adjust"
-                android:id="@+id/hydrometer"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:layout_margin="5dp"
-                android:height="40sp"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:background="@drawable/value_border"
-                android:layout_weight="1"/>
+    <TextView
+        android:text="Gravity Adjust"
+        android:id="@+id/gravity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:height="40sp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:background="@drawable/value_border"
+        android:layout_weight="1"/>
 
-            <TextView
-                android:text="Sugar Priming"
-                android:id="@+id/sugar"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:layout_margin="5dp"
-                android:height="40sp"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:background="@drawable/value_border"
-                android:layout_weight="1"/>
+    <TextView
+        android:text="Hydrometer Adjust"
+        android:id="@+id/hydrometer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:height="40sp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:background="@drawable/value_border"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:text="Sugar Priming"
+        android:id="@+id/sugar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:height="40sp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:background="@drawable/value_border"
+        android:layout_weight="1"/>
 
 </LinearLayout>
