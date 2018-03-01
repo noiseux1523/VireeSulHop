@@ -1,3 +1,3 @@
 # VireeSulHop
 
-Microbrasserie de gars ultra chauds
+Microbrasserie amateure
